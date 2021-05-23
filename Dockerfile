@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:hirsute
 
 RUN apt-get update \
     && apt-get -y install \
@@ -8,7 +8,7 @@ RUN apt-get update \
     ca-certificates \
     && update-ca-certificates \
     && curl  \
-    https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb \
+    https://mega.nz/linux/MEGAsync/xUbuntu_21.04/amd64/megacmd-xUbuntu_21.04_amd64.deb \
     --output /tmp/megacmd.deb \
     && apt install /tmp/megacmd.deb -y \
     && apt-get clean \
@@ -16,4 +16,4 @@ RUN apt-get update \
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 #CMD ["mega-version"]
-ENTRYPOINT ["mega-version"]
+ENTRYPOINT ["mega-cmd-server", "mega-version"]
