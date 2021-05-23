@@ -1,10 +1,11 @@
-FROM ubuntu:bionic
+FROM ubuntu:hiruste
+
+RUN apt-get update && apt-get -y install gpgv2
 
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
     curl \
-    gnupg2 \
     ca-certificates \
     && update-ca-certificates \
     && curl  \
