@@ -14,4 +14,5 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
-ENTRYPOINT ["/usr/bin/mega-cmd", "--version"]
+#ENTRYPOINT ["/usr/bin/mega-cmd"]
+CMD ["mega-version"]
