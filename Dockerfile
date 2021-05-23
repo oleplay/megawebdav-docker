@@ -1,9 +1,8 @@
-FROM ubuntu:hirsute
+FROM ubuntu:bionic
 
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
-    gpgv \
     curl \
     gnupg2 \
     ca-certificates \
