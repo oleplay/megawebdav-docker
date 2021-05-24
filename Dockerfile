@@ -20,7 +20,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
-USER ${PUID}:${PGID}
+RUN useradd megacmd
+
+USER megacmd
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-ENTRYPOINT ["mega-cmd-server"]
+ENTRYPOINT ["usermod -u megacmd ${PUID} -g ${PGID}","mega-cmd-server"]
