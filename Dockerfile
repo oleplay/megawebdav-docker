@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
-USER ${USER_ID}:${GROUP_ID}
+USER ${PUID}:${PGID}
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 ENTRYPOINT ["mega-cmd-server"]
