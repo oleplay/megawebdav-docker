@@ -6,11 +6,10 @@ FROM ubuntu:${RELEASE}
 ENV PUID=1000
 ENV PGID=1000
 
-RUN apt-get update && apt-get -y install gpgv2
-
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
+    gpgv2 \
     curl \
     ca-certificates \
     && update-ca-certificates \
