@@ -25,4 +25,4 @@ RUN useradd megacmd
 USER megacmd
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-ENTRYPOINT ["usermod -u ${PUID} megacmd -g ${PGID}","mega-cmd-server"]
+ENTRYPOINT ["mega-cmd-server"]
