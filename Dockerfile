@@ -3,8 +3,8 @@ ARG ARCH=amd64
 
 FROM ubuntu:${RELEASE}
 
-ENV PUID=1000
-ENV PGID=1000
+ENV PUID=1028
+ENV PGID=101
 
 RUN apt-get update \
     && apt-get -y install \
