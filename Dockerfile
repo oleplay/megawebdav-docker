@@ -1,16 +1,16 @@
-ARG RELEASE=20.04
+ARG RELEASE=18.04
 ARG ARCH=amd64
 
 FROM ubuntu:${RELEASE}
 
-ENV PUID=1028
-ENV PGID=101
+ARG PUID=1028
+ARG PGID=101
 
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
-    gnupg2 \
     curl \
+    gnupg2 \ 
     ca-certificates \
     && update-ca-certificates \
     && curl  \
@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
-RUN useradd megacmd
+RUN useradd -u ${PUID} -g ${PGID} megacmd
 
 USER megacmd
 
