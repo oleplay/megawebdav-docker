@@ -1,6 +1,7 @@
 ARG RELEASE=18.04
 ARG ARCH=amd64
 ARG USER=megacmd
+ARG GROUP=megausers
 #https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb
 
 FROM ubuntu:${RELEASE}
@@ -22,10 +23,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
 #RUN useradd -u ${PUID} -g ${PGID} megacmd
-RUN groupadd -g ${PGID} megausers
-RUN useradd -u ${PUID} -g ${PGID} ${USER}
+RUN groupadd -g ${PGID} ${GROUP}
+RUN useradd -u ${PUID} ${USER}
+RUN usermod -g ${GROUP} ${USER}
 
-USER megacmd
+USER ${USER}
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 ENTRYPOINT ["mega-cmd-server"]
