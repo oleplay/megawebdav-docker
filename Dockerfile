@@ -22,7 +22,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
 #RUN useradd -u ${PUID} -g ${PGID} megacmd
-RUN groupadd -g ${PGID}
+RUN groupadd -g ${PGID} megausers
 RUN useradd -u ${PUID} -g ${PGID} ${USER}
 
 USER megacmd
