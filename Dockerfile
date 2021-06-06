@@ -20,7 +20,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
-RUN useradd -u ${PUID} -g ${PGID} megacmd
+#RUN useradd -u ${PUID} -g ${PGID} megacmd
+RUN useradd -u 1028 -g 101 megacmd
 
 USER megacmd
 
