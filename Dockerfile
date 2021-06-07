@@ -9,6 +9,17 @@ FROM ubuntu:${RELEASE}
 ARG PUID=1028
 ARG PGID=101
 
+#RUN useradd -u ${PUID} -g ${PGID} megacmd
+
+#RUN groupadd -g ${PGID} ${GROUP}
+#RUN useradd -u ${PUID} ${USER}
+#RUN usermod -g ${GROUP} ${USER}
+
+RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers megacmd
+
+#USER ${USER}
+USER megacmd
+
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
@@ -21,17 +32,6 @@ RUN apt-get update \
     && apt install /tmp/megacmd.deb -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
-
-#RUN useradd -u ${PUID} -g ${PGID} megacmd
-
-#RUN groupadd -g ${PGID} ${GROUP}
-#RUN useradd -u ${PUID} ${USER}
-#RUN usermod -g ${GROUP} ${USER}
-
-RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers megacmd
-
-#USER ${USER}
-USER megacmd
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 ENTRYPOINT ["mega-cmd-server"]
