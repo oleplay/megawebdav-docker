@@ -15,6 +15,8 @@ ARG PGID=101
 #RUN useradd -u ${PUID} ${USER}
 #RUN usermod -g ${GROUP} ${USER}
 
+RUN echo ${RELEASE} && echo ${ARCH} && echo ${USER} && echo ${GROUP} && echo ${PUID} && echo ${PGID} && echo https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb
+
 RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers -G wheel megacmd
 
 #USER ${USER}
