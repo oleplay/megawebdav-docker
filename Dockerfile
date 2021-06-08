@@ -11,7 +11,7 @@ ARG GROUP=megausers
 ARG PUID=1028
 ARG PGID=101
 
-RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} -G 0 ${USER}
+RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G 0 ${USER}
 
 RUN apt-get update \
     && apt-get -y install \
@@ -31,4 +31,4 @@ WORKDIR /home/megacmd/
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 ENTRYPOINT ["mega-cmd-server"]
-CMD ["--skip-lock-check"]
+CMD ["--debug --skip-lock-check"]
