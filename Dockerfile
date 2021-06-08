@@ -30,5 +30,5 @@ USER ${USER}
 WORKDIR /home/megacmd/
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-#ENTRYPOINT ["mega-cmd-server"]
-#CMD ["--skip-lock-check"]
+ENTRYPOINT ["mega-cmd-server"]
+CMD ["--skip-lock-check"]
