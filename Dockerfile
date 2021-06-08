@@ -13,10 +13,6 @@ ARG PGID=101
 
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER}
 
-RUN echo ${RELEASE} && echo ${ARCH} && echo ${USER} && echo ${GROUP} && echo ${PUID} && echo ${PGID} && echo https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb
-
-#RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers megacmd
-
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
@@ -31,7 +27,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*  
 
 USER ${USER}
+WORKDIR /home/megacmd/
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-ENTRYPOINT ["mega-cmd-server"]
-CMD ["mega-version --skip-lock-check"]
+#ENTRYPOINT ["mega-cmd-server"]
+#CMD ["--skip-lock-check"]
