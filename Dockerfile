@@ -17,9 +17,6 @@ ARG PGID=101
 
 RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers megacmd
 
-#USER ${USER}
-USER megacmd
-
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
@@ -32,6 +29,11 @@ RUN apt-get update \
     && apt install /tmp/megacmd.deb -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
+    
+
+#USER ${USER}
+USER megacmd
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-ENTRYPOINT ["mega-cmd-server"]
+#ENTRYPOINT ["mega-cmd-server"]
+CMD ["mega-version"]
