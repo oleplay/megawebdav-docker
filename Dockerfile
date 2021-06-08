@@ -1,26 +1,22 @@
 ARG RELEASE=18.04
-ARG ARCH=amd64
-ARG USER=megacmd
-ARG GROUP=megausers
 #https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb
 
 FROM ubuntu:${RELEASE}
 
+#https://stackoverflow.com/questions/44438637/arg-substitution-in-run-command-not-working-for-dockerfile
+RUN echo ${RELEASE} > image_version
+ARG ARCH=amd64
+ARG USER=megacmd
+ARG GROUP=megausers
+
 ARG PUID=1028
 ARG PGID=101
 
-#RUN useradd -u ${PUID} -g ${PGID} megacmd
-
-#RUN groupadd -g ${PGID} ${GROUP}
-#RUN useradd -u ${PUID} ${USER}
-#RUN usermod -g ${GROUP} ${USER}
+RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER}
 
 RUN echo ${RELEASE} && echo ${ARCH} && echo ${USER} && echo ${GROUP} && echo ${PUID} && echo ${PGID} && echo https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb
 
-RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers -G wheel megacmd
-
-#USER ${USER}
-USER megacmd
+#RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers megacmd
 
 RUN apt-get update \
     && apt-get -y install \
@@ -35,6 +31,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*  
 
+USER ${USER}
+
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 ENTRYPOINT ["mega-cmd-server"]
-#CMD ["mega-version"]
+CMD ["mega-version --skip-lock-check"]
