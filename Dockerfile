@@ -15,7 +15,10 @@ ARG PGID=101
 #RUN useradd -u ${PUID} ${USER}
 #RUN usermod -g ${GROUP} ${USER}
 
-RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers megacmd
+RUN groupadd -g 101 megausers && useradd -u 1028 megacmd && usermod -g megausers -G wheel megacmd
+
+#USER ${USER}
+USER megacmd
 
 RUN apt-get update \
     && apt-get -y install \
@@ -28,12 +31,8 @@ RUN apt-get update \
     https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb --output /tmp/megacmd.deb \
     && apt install /tmp/megacmd.deb -y \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
-    
-
-#USER ${USER}
-USER megacmd
+    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*  
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-#ENTRYPOINT ["mega-cmd-server"]
-CMD ["mega-version"]
+ENTRYPOINT ["mega-cmd-server"]
+#CMD ["mega-version"]
