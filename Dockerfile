@@ -11,7 +11,7 @@ ARG GROUP=megausers
 ARG PUID=1028
 ARG PGID=101
 
-RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER}
+RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} -G 0 ${USER}
 
 RUN apt-get update \
     && apt-get -y install \
