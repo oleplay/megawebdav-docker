@@ -3,7 +3,7 @@ ARG RELEASE=18.04
 FROM ubuntu:${RELEASE}
 
 #https://stackoverflow.com/questions/44438637/arg-substitution-in-run-command-not-working-for-dockerfile
-RUN echo ${RELEASE} > image_version
+ARG RELEASE=18.04
 ARG ARCH=amd64
 ARG USER=megacmd
 ARG GROUP=megausers
