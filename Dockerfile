@@ -29,6 +29,10 @@ RUN apt-get update \
 USER ${USER}
 WORKDIR /home/megacmd/
 
+COPY ./megacmd_start.sh megacmd_start.sh
+RUN chmod +x megacmd_start.sh
+ENTRYPOINT megacmd_start.sh
+
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
-ENTRYPOINT ["mega-cmd-server"]
-CMD ["--debug --skip-lock-check"]
+#ENTRYPOINT ["mega-cmd-server"]
+#CMD ["--debug --skip-lock-check"]
