@@ -11,7 +11,7 @@ ARG GROUP=megausers
 ENV PUID=1000
 ENV PGID=1000
 
-#RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER}
+RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER}
 
 RUN apt-get update \
     && apt-get -y install \
