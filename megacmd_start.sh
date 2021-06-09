@@ -1,7 +1,7 @@
 #1/bin/bash
 
 # Attempting to use docker environment variables
-usermod -u ${PUID} ${USER} && usermod -g ${PGID} ${USER}
+groupadd -g ${PGID} megausers && useradd -u ${PUID} megacmd && usermod -g megausers megacmd && usermod -G root megacmd
 
 mega-version
 echo "------------------------------------------------------------------------------"
