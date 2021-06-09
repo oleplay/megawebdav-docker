@@ -5,8 +5,8 @@ FROM ubuntu:${RELEASE}
 #https://stackoverflow.com/questions/44438637/arg-substitution-in-run-command-not-working-for-dockerfile
 ARG RELEASE=18.04
 ARG ARCH=amd64
-ARG USER=megacmd
-ARG GROUP=megausers
+ENV USER=megacmd
+ENV GROUP=megausers
 
 ENV PUID=1000
 ENV PGID=1000
