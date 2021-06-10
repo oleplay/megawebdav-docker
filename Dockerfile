@@ -31,7 +31,7 @@ COPY ./megacmd_start.sh megacmd_start.sh
 RUN chmod +x megacmd_start.sh
 USER ${USER}
 
-ENTRYPOINT megacmd_start.sh
+ENTRYPOINT /home/megacmd/megacmd_start.sh
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 #ENTRYPOINT ["mega-cmd-server"]
