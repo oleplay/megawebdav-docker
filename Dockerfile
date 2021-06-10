@@ -27,11 +27,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*  
 
 WORKDIR /home/megacmd/
-COPY ./megacmd_start.sh megacmd_start.sh
+COPY ./megacmd_start.sh ./megacmd_start.sh
 RUN chmod +x megacmd_start.sh
 USER ${USER}
 
-ENTRYPOINT /home/megacmd/megacmd_start.sh
+ENTRYPOINT ./megacmd_start.sh
 
 #ENTRYPOINT ["/usr/bin/mega-cmd"]
 #ENTRYPOINT ["mega-cmd-server"]
