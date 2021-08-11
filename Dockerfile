@@ -32,9 +32,9 @@ RUN echo '${USER} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 WORKDIR /home/megacmd/
 COPY ./megacmd_start.sh ./megacmd_start.sh
 RUN chmod +x megacmd_start.sh
-USER ${USER}
+#USER ${USER}
 
-#CMD ["groupmod" "-g" "${PGID}" "${GROUP}" "&&" "usermod" "-u" "${PUID}" "${USER}" "&&" "usermod" "-g" "${PGID}" "${USER}"
+CMD ["groupmod", "-g", "${PGID}", "${GROUP}", "&&", "usermod", "-u", "${PUID}", "${USER}", "&&", "usermod", "-g", "${PGID}", "${USER}", "&&", "./megacmd_start.sh"]
 
 ENTRYPOINT ./megacmd_start.sh
 
