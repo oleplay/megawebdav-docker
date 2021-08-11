@@ -27,7 +27,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
     
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN echo '${USER} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR /home/megacmd/
 COPY ./megacmd_start.sh ./megacmd_start.sh
