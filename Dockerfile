@@ -10,6 +10,7 @@ ENV GROUP=megausers
 
 ENV PUID=1000
 ENV PGID=1000
+ENV SESSION_ID=session_token
 
 RUN apt-get update \
     && apt-get -y install \
