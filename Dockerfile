@@ -38,7 +38,7 @@ RUN chmod +x megacmd_start.sh
 
 #CMD ["groupmod", "-g", "${PGID}", "${GROUP}", "&&", "usermod", "-u", "${PUID}", "${USER}", "&&", "usermod", "-g", "${PGID}", "${USER}", "&&", "./megacmd_start.sh"]
 
-CMD ["./fix_permissions.sh", "&&", "su", "-c", "./megacmd_start.sh", ${USER}]
+ENTRYPOINT ['./fix_permissions.sh', '&&', 'su', '-c', './megacmd_start.sh', ${USER}]
 
 #ENTRYPOINT ./megacmd_start.sh
 
