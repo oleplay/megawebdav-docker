@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Attempting to use docker environment variables
-#groupmod -g ${PGID} ${GROUP} && usermod -u ${PUID} ${USER} && usermod -g ${PGID} ${USER}
+groupmod -g ${PGID} ${GROUP} && usermod -u ${PUID} ${USER} && usermod -g ${PGID} ${USER}
 
 #mega-cmd-server --debug --skip-lock-check
 
