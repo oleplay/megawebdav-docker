@@ -32,6 +32,7 @@ RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 WORKDIR /home/megacmd/
 COPY ./fix_permissions.sh ./fix_permissions.sh
 COPY ./megacmd_start.sh ./megacmd_start.sh
+RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 #USER ${USER}
 
