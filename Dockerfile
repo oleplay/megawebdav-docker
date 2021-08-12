@@ -12,6 +12,8 @@ ENV PUID=1000
 ENV PGID=1000
 ENV SESSION_ID=session_token
 
+USER ${USER}
+
 RUN apt-get update \
     && apt-get -y install \
     --no-install-recommends \
@@ -29,7 +31,7 @@ RUN apt-get update \
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
 RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-WORKDIR /home/megacmd/
+WORKDIR /home/${USER}/
 COPY ./fix_permissions.sh ./fix_permissions.sh
 COPY ./megacmd_start.sh ./megacmd_start.sh
 RUN chmod +x fix_permissions.sh
