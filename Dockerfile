@@ -12,6 +12,9 @@ ENV PUID=1000
 ENV PGID=1000
 ENV SESSION_ID=session_token
 
+RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
+RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 USER ${USER}
 
 RUN apt-get update \
@@ -27,9 +30,6 @@ RUN apt-get update \
     && apt install /tmp/megacmd.deb -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
-    
-RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
-RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR /home/${USER}/
 COPY ./fix_permissions.sh ./fix_permissions.sh
@@ -38,12 +38,4 @@ RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 #USER ${USER}
 
-#CMD ["groupmod", "-g", "${PGID}", "${GROUP}", "&&", "usermod", "-u", "${PUID}", "${USER}", "&&", "usermod", "-g", "${PGID}", "${USER}", "&&", "./megacmd_start.sh"]
-
 ENTRYPOINT ['./fix_permissions.sh', '&&', 'su', '-c', './megacmd_start.sh', ${USER}]
-
-#ENTRYPOINT ./megacmd_start.sh
-
-#ENTRYPOINT ["/usr/bin/mega-cmd"]
-#ENTRYPOINT ["mega-cmd-server"]
-#CMD ["--debug --skip-lock-check"]
