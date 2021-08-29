@@ -17,7 +17,7 @@ RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 #USER ${USER}
 
-RUN sudo apt-get update \
+RUN apt-get update \
     && sudo apt-get -y install \
     --no-install-recommends \
     sudo \
