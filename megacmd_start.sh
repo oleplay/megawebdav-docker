@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Attempting to use docker environment variables
-#groupmod -g ${PGID} ${GROUP} && usermod -u ${PUID} ${USER} && usermod -g ${PGID} ${USER}
+groupmod -g ${PGID} ${GROUP} && usermod -u ${PUID} ${USER} && usermod -g ${PGID} ${USER}
 
-#sudo -u ${USER} mega-cmd-server --debug --skip-lock-check
+mega-cmd-server --debug --skip-lock-check > megacmd_shutup 2>&1 &
 
-mega-version
-mega-login ${SESSION_ID}
+su -c mega-version ${USER}
+su -c mega-login ${SESSION_ID} ${USER}
 echo "------------------------------------------------------------------------------"
-mega-whoami
+su -c mega-whoami ${USER}
 echo "------------------------------------------------------------------------------"
-mega-https on
-mega-https
+su -c mega-https on ${USER}
+su -c mega-https ${USER}
 echo "------------------------------------------------------------------------------"
-mega-sync ~/Mega /
+su -c mega-sync ~/Mega / ${USER}
