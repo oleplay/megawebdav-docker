@@ -66,4 +66,4 @@ RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 #USER ${USER}
 
-CMD ./fix_permissions.sh && su -c ./megacmd_start.sh megacmd
+CMD ./megacmd_start.sh
