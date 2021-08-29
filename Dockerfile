@@ -14,7 +14,33 @@ ENV SESSION_ID=session_token
 
 #https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb
 
-RUN apt-get update && apt-get -y install curl autoconf libtool g++ libcrypto++-dev libz-dev libsqlite3-dev libssl-dev libcurl4-gnutls-dev libreadline-dev libpcre++-dev libsodium-dev libc-ares-dev libfreeimage-dev libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libmediainfo-dev libzen-dev libuv1-dev && curl https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb --output /tmp/megacmd.deb && apt install /tmp/megacmd.deb -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
+RUN apt-get update \
+    && apt-get -y install \
+    curl \
+    autoconf \
+    libtool \
+    g++ \
+    libcrypto++-dev \
+    libz-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libcurl4-gnutls-dev \
+    libreadline-dev \
+    libpcre++-dev \
+    libsodium-dev \
+    libc-ares-dev \
+    libfreeimage-dev \
+    libavcodec-dev \
+    libavutil-dev \
+    libavformat-dev \
+    libswscale-dev \
+    libmediainfo-dev \
+    libzen-dev \
+    libuv1-dev \
+    && curl https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb --output /tmp/megacmd.deb \
+    && apt install /tmp/megacmd.deb -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
 #RUN apt-get update \
 #    && apt-get -y install \
@@ -40,4 +66,4 @@ RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 #USER ${USER}
 
-ENTRYPOINT ./fix_permissions.sh && ./megacmd_start.sh
+CMD ./fix_permissions.sh && su -c ./megacmd_start.sh megacmd
