@@ -15,7 +15,7 @@ ENV SESSION_ID=session_token
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
 RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-USER ${USER}
+#USER ${USER}
 
 RUN sudo apt-get update \
     && sudo apt-get -y install \
@@ -38,4 +38,4 @@ RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 #USER ${USER}
 
-ENTRYPOINT ['./fix_permissions.sh', '&&', 'su', '-c', './megacmd_start.sh', ${USER}]
+ENTRYPOINT ./fix_permissions.sh && su -c ./megacmd_start.sh ${USER}
