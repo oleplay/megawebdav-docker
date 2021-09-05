@@ -13,4 +13,4 @@ echo "--------------------------------------------------------------------------
 su -c mega-https on ${USER}
 su -c mega-https ${USER}
 echo "------------------------------------------------------------------------------"
-su -c mega-sync ~/Mega / ${USER}
+su -c mega-sync /home/${USER}/Mega / ${USER}
