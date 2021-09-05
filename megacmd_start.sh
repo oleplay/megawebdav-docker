@@ -6,7 +6,13 @@ groupmod -g ${PGID} ${GROUP} && usermod -u ${PUID} ${USER} && usermod -g ${PGID}
 mega-cmd-server --debug --skip-lock-check &>/dev/null &
 
 su -c mega-version ${USER}
-su -c mega-login ${SESSION_ID} ${USER}
+existing_session=/home/${USER}/.megaCmd/session
+if [ -f  "$existing_session"]; then
+    su -c mega-login ${USER}
+else 
+    echo "Existing session found"
+    su -c mega-login ${SESSION_ID} ${USER}
+fi
 echo "------------------------------------------------------------------------------"
 su -c mega-whoami ${USER}
 echo "------------------------------------------------------------------------------"
