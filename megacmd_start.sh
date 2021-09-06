@@ -4,8 +4,8 @@
 echo "Setting PID and GID environmental variables"
 ./fix_permissions.sh
 
-echo "Starting MegaCMD Server"
-mega-cmd-server --debug --skip-lock-check &>/dev/null &
+#echo "Starting MegaCMD Server"
+#mega-cmd-server --debug --skip-lock-check &>/dev/null &
 
 su -c mega-version ${USER}
 existing_session=/home/${USER}/.megaCmd/session
