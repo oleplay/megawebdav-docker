@@ -66,4 +66,5 @@ RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 #USER ${USER}
 
-ENTRYPOINT ./megacmd_start.sh
+ENTRYPOINT mega-cmd-server --debug --skip-lock-check
+CMD ./megacmd_start.sh
