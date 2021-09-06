@@ -49,5 +49,4 @@ COPY ./megacmd_start.sh ./megacmd_start.sh
 RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 
-CMD tail -f /dev/null
-ENTRYPOINT mega-cmd-server --debug --skip-lock-check
+CMD ./megacmd_start.sh
