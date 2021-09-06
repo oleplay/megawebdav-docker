@@ -12,8 +12,6 @@ ENV PUID=1000
 ENV PGID=1000
 ENV SESSION_ID=session_token
 
-#https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb
-
 RUN apt-get update \
     && apt-get -y install \
     curl \
@@ -42,20 +40,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
 
-#RUN apt-get update \
-#    && apt-get -y install \
-#    --no-install-recommends \
-#    sudo \
-#    curl \
-#    gnupg2 \ 
-#    ca-certificates \
-#    && update-ca-certificates \
-#    && curl  \
-#    https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb --output /tmp/megacmd.deb \
-#    && apt install /tmp/megacmd.deb -y \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
-
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
 RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
@@ -64,7 +48,6 @@ COPY ./fix_permissions.sh ./fix_permissions.sh
 COPY ./megacmd_start.sh ./megacmd_start.sh
 RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
-#USER ${USER}
 
+CMD tail -f /dev/null
 ENTRYPOINT mega-cmd-server --debug --skip-lock-check
-CMD ./megacmd_start.sh
