@@ -10,9 +10,10 @@ ENV GROUP=megausers
 ENV PUID=1000
 ENV PGID=1000
 
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Berlin
+
 RUN apt-get update \
-    DEBIAN_FRONTEND=noninteractive \
-    TZ=Europe/Berlin \
     && apt-get -y --no-install-recommends install \
     curl \
     autoconf \
