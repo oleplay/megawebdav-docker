@@ -42,7 +42,6 @@ RUN apt-get update \
     && apt-get clean 
 
 RUN wget -O- https://github.com/meganz/MEGAsync/raw/706757d55566bf83007abd17defc4fefa97ace4b/build/MEGAsync/MEGAsync/debian.postinst | sed '106,157!d' | gpg --dearmor | tee /usr/share/keyrings/meganz-archive-keyring.gpg
-RUN file /usr/share/keyrings/meganz-archive-keyring.gpg
 RUN sh -c "echo deb [arch=amd64 signed-by=/usr/share/keyrings/meganz-archive-keyring.gpg] https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ ./" >> /etc/apt/sources.list
 RUN apt-get update \
     && apt-get -y --no-install-recommends install megacmd \ 
