@@ -17,7 +17,7 @@ if [ -f  "$existing_session" ]; then
     su -c mega-sync ${USER}
 else 
     echo "No detected session. Logging in as:"
-    if [[ -z "${SESSION_ID}"] ]; then 
+    if [ -z "${SESSION_ID}"]; then 
         su -c mega-login ${SESSION_ID} ${USER}
     else
         su -c "mega-login ${USERNAME} ${PASSWORD}" ${USER}
@@ -28,7 +28,7 @@ else
     echo "------------------------------------------------------------------------------"
     su -c mega-https ${USER}
     echo "------------------------------------------------------------------------------"
-    su -c "mega-webdav --public ${WEBDAV_PATH}" ${USER}
+    su -c "mega-webdav --public "${WEBDAV_PATH}"" ${USER}
 fi
 
 # Cheap and dirty way to keep container running
