@@ -1,3 +1,4 @@
+ARG RELEASE=21.04
 FROM ubuntu:${RELEASE}
 
 #https://stackoverflow.com/questions/44438637/arg-substitution-in-run-command-not-working-for-dockerfile
