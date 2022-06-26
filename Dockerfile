@@ -36,7 +36,7 @@ RUN apt-get update \
     software-properties-common \
     && add-apt-repository https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ \
     && apt update \ 
-    && apt install megacmd
+    && apt install megacmd \
     && apt-get clean 
 
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
