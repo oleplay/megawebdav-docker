@@ -13,6 +13,8 @@ ENV PGID=1000
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Berlin
 
+RUN sh -c echo "[arch=amd64, allow-insecure=yes] https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ ./" >> /etc/apt/sources.list 
+
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
     curl \
@@ -36,10 +38,7 @@ RUN apt-get update \
     libmediainfo-dev \
     libzen-dev \
     libuv1-dev \
-    software-properties-common \
-    && add-apt-repository [arch=amd64, allow-insecure=yes] https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ ./ \
-    && apt update \ 
-    && apt install -y --no-install-recommends megacmd \
+    megacmd \  \
     && apt-get clean 
 
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
