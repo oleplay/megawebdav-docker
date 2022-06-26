@@ -37,6 +37,7 @@ RUN apt-get update \
     libzen-dev \
     libuv1-dev \
     ca-certificates \
+    gnupg2 \ 
     && apt-get clean 
 
 RUN wget -q -O - https://github.com/meganz/MEGAsync/raw/706757d55566bf83007abd17defc4fefa97ace4b/build/MEGAsync/MEGAsync/debian.postinst | sed '106,157!d' | apt-key add -
