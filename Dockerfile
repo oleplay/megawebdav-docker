@@ -1,5 +1,3 @@
-ARG RELEASE=21.04
-
 FROM ubuntu:${RELEASE}
 
 #https://stackoverflow.com/questions/44438637/arg-substitution-in-run-command-not-working-for-dockerfile
@@ -10,10 +8,10 @@ ENV GROUP=megausers
 
 ENV PUID=1000
 ENV PGID=1000
-ENV SESSION_ID=session_token
 
-RUN apt-get update \
-    && apt-get -y install \
+RUN add-apt-repository https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ \
+    && apt-get update \
+    && apt-get -y --no-install-recommends install \
     curl \
     autoconf \
     libtool \
@@ -35,10 +33,9 @@ RUN apt-get update \
     libmediainfo-dev \
     libzen-dev \
     libuv1-dev \
-    && curl https://mega.nz/linux/MEGAsync/xUbuntu_${RELEASE}/${ARCH}/megacmd-xUbuntu_${RELEASE}_${ARCH}.deb --output /tmp/megacmd.deb \
-    && apt install /tmp/megacmd.deb -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
+    software-properties-common \
+    megacmd \
+    && apt-get clean 
 
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
 RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
