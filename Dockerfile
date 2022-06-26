@@ -10,8 +10,7 @@ ENV GROUP=megausers
 ENV PUID=1000
 ENV PGID=1000
 
-RUN add-apt-repository https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ \
-    && apt-get update \
+RUN apt-get update \
     && apt-get -y --no-install-recommends install \
     curl \
     autoconf \
@@ -35,7 +34,9 @@ RUN add-apt-repository https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ \
     libzen-dev \
     libuv1-dev \
     software-properties-common \
-    megacmd \
+    && add-apt-repository https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ \
+    && apt update \ 
+    && apt install megacmd
     && apt-get clean 
 
 RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
