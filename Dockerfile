@@ -13,7 +13,7 @@ ENV PGID=1000
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Berlin
 
-RUN echo '[arch=amd64, allow-insecure=yes] https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ ./' >> /etc/apt/sources.list
+RUN echo "[arch=amd64, allow-insecure=yes] https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ ./" >> /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
