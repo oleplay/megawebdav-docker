@@ -37,7 +37,7 @@ RUN apt-get update \
     libzen-dev \
     libuv1-dev \
     software-properties-common \
-    && add-apt-repository https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ \
+    && add-apt-repository [arch=amd64, allow-insecure=yes] https://mega.nz/linux/repo/xUbuntu_${RELEASE}/ ./ \
     && apt update \ 
     && apt install -y --no-install-recommends megacmd \
     && apt-get clean 
