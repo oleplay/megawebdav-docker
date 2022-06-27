@@ -2,33 +2,32 @@
 
 # Attempting to use docker environment variables
 echo "Setting PID and GID environmental variables"
-./fix_permissions.sh
 
 #echo "Starting MegaCMD Server"
 #mega-cmd-server --debug --skip-lock-check &>/dev/null &
 
-su -c mega-version ${USER}
+mega-version
 existing_session=/home/${USER}/.megaCmd/session
 if [ -f  "$existing_session" ]; then
     echo "Session file found, who am I?"
-    su -c mega-whoami ${USER}
+    mega-whoami
     echo "------------------------------------------------------------------------------"
     echo "What sync tasks what I running?"
-    su -c mega-sync ${USER}
+    mega-sync
 else 
     echo "No detected session. Logging in as:"
     if [ -z "${SESSION_ID}"]; then 
-        su -c mega-login ${SESSION_ID} ${USER}
+        mega-login ${SESSION_ID}
     else
-        su -c "mega-login ${USERNAME} ${PASSWORD}" ${USER}
+        mega-login ${USERNAME} ${PASSWORD}
     fi
-    su -c mega-whoami ${USER}
+    mega-whoami
     echo "------------------------------------------------------------------------------"
-    su -c mega-https on ${USER}
+    mega-https on
     echo "------------------------------------------------------------------------------"
-    su -c mega-https ${USER}
+    mega-https
     echo "------------------------------------------------------------------------------"
-    su -c "mega-webdav --public "${WEBDAV_PATH}"" ${USER}
+    mega-webdav --public "${WEBDAV_PATH}"
 fi
 
 # Cheap and dirty way to keep container running
