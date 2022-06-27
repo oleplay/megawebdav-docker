@@ -47,13 +47,12 @@ RUN apt-get update \
     && apt-get -y --no-install-recommends install megacmd \ 
     && apt-get clean
 
-
 RUN addgroup --gid 1337 app && adduser --uid 1337 --gid 1337 --disabled-password --gecos "App User" app
-
-USER 1337:1337
 
 WORKDIR /home/${USER}/
 COPY ./megacmd_start.sh ./megacmd_start.sh
 RUN chmod +x megacmd_start.sh
+
+USER 1337:1337
 
 CMD ./megacmd_start.sh
