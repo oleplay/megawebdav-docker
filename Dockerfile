@@ -47,13 +47,13 @@ RUN apt-get update \
     && apt-get -y --no-install-recommends install megacmd \ 
     && apt-get clean
 
-RUN groupadd -g ${PGID} ${GROUP} && useradd -u ${PUID} ${USER} && usermod -g ${GROUP} ${USER} && usermod -G root ${USER} && usermod -g sudo ${USER}
-RUN echo ${USER} 'ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+RUN addgroup --gid 1337 app && adduser --uid 1337 --gid 1337 --disabled-password --gecos "App User" app
+
+USER 1337:1337
 
 WORKDIR /home/${USER}/
-COPY ./fix_permissions.sh ./fix_permissions.sh
 COPY ./megacmd_start.sh ./megacmd_start.sh
-RUN chmod +x fix_permissions.sh
 RUN chmod +x megacmd_start.sh
 
 CMD ./megacmd_start.sh
