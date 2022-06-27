@@ -15,10 +15,12 @@ if [ -f  "$existing_session" ]; then
     echo "What sync tasks what I running?"
     mega-sync
 else 
-    echo "No detected session. Logging in as:"
-    if [ -z "${SESSION_ID}"]; then 
+    echo "No detected session."
+    if [ -z "${SESSION_ID}"]; then
+        echo "Session set. Using session login:"
         mega-login ${SESSION_ID}
     else
+        echo "Logging in as: ${USERNAME}"
         mega-login ${USERNAME} ${PASSWORD}
     fi
     mega-whoami
