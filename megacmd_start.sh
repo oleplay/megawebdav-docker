@@ -17,11 +17,11 @@ if [ -f  "$existing_session" ]; then
 else 
     echo "No detected session."
     if [ -z "${SESSION_ID}"]; then
-        echo "Session set. Using session login:"
-        mega-login ${SESSION_ID}
-    else
         echo "Logging in as: ${USERNAME}"
         mega-login ${USERNAME} ${PASSWORD}
+    else
+        echo "Session set. Using session login:"
+        mega-login ${SESSION_ID}
     fi
     mega-whoami
     echo "------------------------------------------------------------------------------"
